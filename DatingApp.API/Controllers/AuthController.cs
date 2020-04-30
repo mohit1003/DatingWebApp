@@ -49,11 +49,12 @@ namespace DatingApp.API.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> login(UserForLoginDto userForLoginDto)
         {
+            //throw new Exception("Computer Says no!");
             var userFromRepo = await _repo.Login(userForLoginDto.Username, userForLoginDto.Password);
 
             if (userFromRepo == null)
             {
-                return Unauthorized();
+                return Unauthorized("Invalid Username or Password");
             }
             var claims = new[]
             {
